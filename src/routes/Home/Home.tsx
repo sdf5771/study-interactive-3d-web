@@ -21,16 +21,33 @@ function Home() {
 
         const scene = new THREE.Scene()
 
-        // Perspective camera (원근 카메라)
-        const fov = 75 // field of view
-        const aspect = windowWidth / windowHeight // aspect ratio
-        const near = 0.1 // near plane
-        const far = 1000 // far plane
+        // // Perspective camera (원근 카메라)
+        // const fov = 75 // field of view
+        // const aspect = windowWidth / windowHeight // aspect ratio
+        // const near = 0.1 // near plane
+        // const far = 1000 // far plane
 
-        const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+        // const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+        // camera.position.x = 2
+        // camera.position.y = 2
+        // camera.position.z = 5
+
+        // Orthographic camera (직교 카메라)
+        const camera = new THREE.OrthographicCamera(
+            -(windowWidth / windowHeight), // left plane
+            windowWidth / windowHeight, // right plane
+            1, // top plane
+            -1, // bottom plane
+            0.1, // near plane
+            1000 // far plane
+        )
+
         camera.position.x = 2
         camera.position.y = 2
         camera.position.z = 5
+        camera.lookAt(0, 0, 0) 
+        camera.zoom = 0.5
+        camera.updateProjectionMatrix()
 
         scene.add(camera)
 
