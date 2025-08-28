@@ -50,10 +50,18 @@ function Camera() {
         // camera.zoom = 0.5
         // camera.updateProjectionMatrix()
 
-        // scene.add(camera)
+        scene.add(camera)
+
+        const light = new THREE.DirectionalLight(0xffffff, 1)
+        light.position.x = 1
+        light.position.z = 2
+        scene.add(light)
 
         const geometry = new THREE.BoxGeometry(1, 1, 1)
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+        // // MeshBasicMaterial: 기본 메시 재질, 단순 색상 적용
+        // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+        // MeshStandardMaterial: 표준 메시 재질, 더 복잡한 광원 효과 적용
+        const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
         const mesh = new THREE.Mesh(geometry, material)
         scene.add(mesh)
 
