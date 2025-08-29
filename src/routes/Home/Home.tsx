@@ -10,6 +10,7 @@ function Home() {
                 <h1>Home / Page List</h1>
                 <button onClick={() => navigate('/camera')}>Go to Camera</button>
                 <button onClick={() => navigate('/gsap')}>Go to Gsap</button>
+                <button onClick={() => navigate('/utility')}>Go to Utility</button>
             </div>
         </main>
     )

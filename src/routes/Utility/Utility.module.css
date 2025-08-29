@@ -1,0 +1,11 @@
+.main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.main > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}

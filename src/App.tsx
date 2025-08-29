@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Home, Camera, Gsap } from './routes'
+import { Home, Camera, Gsap, Utility } from './routes'
 
 function App() {
 
@@ -8,6 +8,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/camera" element={<Camera />} />
       <Route path="/gsap" element={<Gsap />} />
+      <Route path="/utility" element={<Utility />} />
     </Routes>
   )
 }
