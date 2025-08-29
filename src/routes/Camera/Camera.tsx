@@ -21,6 +21,7 @@ function Camera() {
         rendererRef.current.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1)
 
         const scene = new THREE.Scene()
+        scene.fog = new THREE.Fog('black', 3, 7)
 
         // Perspective camera (원근 카메라)
         const fov = 75 // field of view
@@ -31,7 +32,7 @@ function Camera() {
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
         camera.position.x = 2
         camera.position.y = 2
-        camera.position.z = 5
+        camera.position.z = 7
 
         // // Orthographic camera (직교 카메라)
         // const camera = new THREE.OrthographicCamera(
@@ -54,7 +55,8 @@ function Camera() {
 
         const light = new THREE.DirectionalLight(0xffffff, 1)
         light.position.x = 1
-        light.position.z = 2
+        light.position.y = 3
+        light.position.z = 5
         scene.add(light)
 
         const geometry = new THREE.BoxGeometry(1, 1, 1)
@@ -63,11 +65,22 @@ function Camera() {
 
         // MeshStandardMaterial: 표준 메시 재질, 더 복잡한 광원 효과 적용
         const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
-        
-        const mesh = new THREE.Mesh(geometry, material)
-        scene.add(mesh)
 
-        const clock = new THREE.Clock()
+        const meshes: THREE.Mesh[] = [];
+        let mesh: THREE.Mesh;
+
+        for (let i = 0; i < 10; i++) {
+            mesh = new THREE.Mesh(geometry, material)
+            mesh.position.x = Math.random() * 5 - 2.5
+            mesh.position.z = Math.random() * 5 - 2.5
+            meshes.push(mesh)
+            scene.add(mesh)
+        }
+        
+        // const mesh = new THREE.Mesh(geometry, material)
+        // scene.add(mesh)
+
+        // const clock = new THREE.Clock()
 
         function draw() {
             // // 각도는 Radian 단위를 이용
@@ -76,22 +89,28 @@ function Camera() {
             // mesh.rotation.x += 0.01
             // mesh.rotation.y += 0.01
             // console.log(positionYFlag)
-            const time = clock.getElapsedTime()
-            console.log(time)
+
+            // const time = clock.getElapsedTime()
+            // console.log(time)
 
             // // 각도를 라디안 단위로 변환
             // mesh.rotation.x += THREE.MathUtils.degToRad(1) // 1도씩 증가
             // mesh.rotation.y += THREE.MathUtils.degToRad(1) // 1도씩 증가
 
-            // 시간을 사용해서 rotation의 값을 계산
-            mesh.rotation.x = time
-            mesh.rotation.y = time
-            mesh.rotation.z = time
+            // // 시간을 사용해서 rotation의 값을 계산
+            // mesh.rotation.x = time
+            // mesh.rotation.y = time
+            // mesh.rotation.z = time
 
-            mesh.position.y = time
+            // mesh.position.y = time
 
-            light.position.x += 0.01
-            light.position.z += 0.01
+            // light.position.x += 0.01
+            // light.position.z += 0.01
+            if(meshes.length > 0) {
+                meshes.forEach(mesh => {
+                    mesh.rotation.y += 0.01
+                })
+            }
 
             rendererRef.current?.render(scene, camera)
 
