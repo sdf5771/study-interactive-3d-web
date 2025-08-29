@@ -60,12 +60,45 @@ function Camera() {
         const geometry = new THREE.BoxGeometry(1, 1, 1)
         // // MeshBasicMaterial: 기본 메시 재질, 단순 색상 적용
         // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 })
+
         // MeshStandardMaterial: 표준 메시 재질, 더 복잡한 광원 효과 적용
         const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+        
         const mesh = new THREE.Mesh(geometry, material)
         scene.add(mesh)
 
-        rendererRef.current.render(scene, camera)
+        const clock = new THREE.Clock()
+
+        function draw() {
+            // // 각도는 Radian 단위를 이용
+            // // 360도는 2PI = 3.141592653589793
+            // // 1도는 PI / 180 = 0.017453292519943295
+            // mesh.rotation.x += 0.01
+            // mesh.rotation.y += 0.01
+            // console.log(positionYFlag)
+            const time = clock.getElapsedTime()
+            console.log(time)
+
+            // // 각도를 라디안 단위로 변환
+            // mesh.rotation.x += THREE.MathUtils.degToRad(1) // 1도씩 증가
+            // mesh.rotation.y += THREE.MathUtils.degToRad(1) // 1도씩 증가
+
+            // 시간을 사용해서 rotation의 값을 계산
+            mesh.rotation.x = time
+            mesh.rotation.y = time
+            mesh.rotation.z = time
+
+            mesh.position.y = time
+
+            light.position.x += 0.01
+            light.position.z += 0.01
+
+            rendererRef.current?.render(scene, camera)
+
+            window.requestAnimationFrame(draw)
+        }
+
+        draw()
 
         function resizeHandler() {
             if(!camera || !rendererRef.current) return
