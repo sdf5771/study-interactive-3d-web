@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import styles from './Utility.module.css'
 import * as THREE from 'three'
 import Stats from 'stats.js';
+import dat from 'dat.gui';
 
 function Utility() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -9,7 +10,6 @@ function Utility() {
 
     useEffect(() => {
         if (!canvasRef.current) return
-        
         rendererRef.current = new THREE.WebGLRenderer({
             canvas: canvasRef.current,
             antialias: true,
@@ -63,6 +63,17 @@ function Utility() {
         
         scene.add(mesh)
 
+        // Dat.GUI
+        const gui = new dat.GUI()
+        gui.add(mesh.position, 'x', -5, 5, 0.01)
+        gui.add(mesh.position, 'y', -5, 5, 0.01)
+        gui
+            .add(mesh.position, 'z')
+            .min(-5)
+            .max(5)
+            .step(0.01)
+            .name(`mesh's z position`)
+
         // camera.lookAt(mesh.position)
 
         const stats = new Stats()
@@ -97,6 +108,23 @@ function Utility() {
 
         return () => {
             window.removeEventListener('resize', resizeHandler)
+
+            if(stats) {
+                stats.dom.remove()
+            }
+
+            if(gui) {
+                gui.destroy()
+            }
+
+            if(canvasRef.current) {
+                canvasRef.current = null
+            }
+
+            if(rendererRef.current) {
+                rendererRef.current.dispose()
+                rendererRef.current = null
+            }
         }
 
     }, [canvasRef.current])
