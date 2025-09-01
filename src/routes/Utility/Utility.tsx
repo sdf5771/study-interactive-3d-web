@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import styles from './Utility.module.css'
 import * as THREE from 'three'
+import Stats from 'stats.js';
 
 function Utility() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -29,9 +30,9 @@ function Utility() {
         const far = 1000 // far plane
 
         const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
-        camera.position.x = 1
-        camera.position.y = 3
-        camera.position.z = 2
+        // camera.position.x = 1
+        camera.position.y = 1
+        camera.position.z = 5
 
         scene.add(camera)
 
@@ -44,13 +45,13 @@ function Utility() {
         directionalLight.position.z = 5
         scene.add(directionalLight)
 
-        // AxesHelper
-        const axesHelper = new THREE.AxesHelper(3);
-        scene.add(axesHelper)
+        // // AxesHelper
+        // const axesHelper = new THREE.AxesHelper(3);
+        // scene.add(axesHelper)
 
-        // GridHelper
-        const gridHelper = new THREE.GridHelper(5);
-        scene.add(gridHelper)
+        // // GridHelper
+        // const gridHelper = new THREE.GridHelper(5);
+        // scene.add(gridHelper)
 
         const geometry = new THREE.BoxGeometry(1, 1, 1)
 
@@ -58,11 +59,14 @@ function Utility() {
         const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 })
         
         const mesh = new THREE.Mesh(geometry, material)
-        mesh.position.x = 2;
+        // mesh.position.x = 2;
         
         scene.add(mesh)
 
-        camera.lookAt(mesh.position)
+        // camera.lookAt(mesh.position)
+
+        const stats = new Stats()
+        document.body.appendChild(stats.dom)
 
         const clock = new THREE.Clock()
 
@@ -70,6 +74,8 @@ function Utility() {
             const time = clock.getElapsedTime();
 
             mesh.rotation.y = time;
+
+            stats.update()
 
             rendererRef.current?.render(scene, camera)
 
