@@ -11,6 +11,7 @@ function Home() {
                 <button onClick={() => navigate('/camera')}>Go to Camera</button>
                 <button onClick={() => navigate('/gsap')}>Go to Gsap</button>
                 <button onClick={() => navigate('/utility')}>Go to Utility</button>
+                <button onClick={() => navigate('/transform')}>Go to Transform</button>
             </div>
         </main>
     )
