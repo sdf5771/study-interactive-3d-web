@@ -3,11 +3,12 @@ import Camera from './Camera/Camera'
 import Gsap from './Gsap/Gsap'
 import Utility from './Utility/Utility'
 import Transform from './Transform/Transform'
-
+import Group from './Group/Group'
 export {
     Home,
     Camera,
     Gsap,
     Utility,
-    Transform
+    Transform,
+    Group
 }
