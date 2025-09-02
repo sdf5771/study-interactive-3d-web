@@ -5,6 +5,7 @@ import Utility from './Utility/Utility'
 import Transform from './Transform/Transform'
 import Group from './Group/Group'
 import Geometry from './Geometry/Geometry'
+import SphereGeometry from './SphereGeometry/SphereGeometry'
 export {
     Home,
     Camera,
@@ -12,5 +13,6 @@ export {
     Utility,
     Transform,
     Group,
-    Geometry
+    Geometry,
+    SphereGeometry
 }
