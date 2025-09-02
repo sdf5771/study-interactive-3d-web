@@ -73,8 +73,8 @@ function Transform() {
             .max(5)
             .step(0.01)
             .name(`mesh's z`)
-        gui.add(camera.position, 'x', -5, 5, 0.01).name(`camera's x`)
-        gui.add(camera.position, 'y', -5, 5, 0.01).name(`camera's y`)
+        gui.add(camera.position, 'x', -10, 10, 0.01).name(`camera's x`)
+        gui.add(camera.position, 'y', -10, 10, 0.01).name(`camera's y`)
         gui.add(camera.position, 'z', -10, 10, 0.01).name(`camera's z`)
 
         // camera.lookAt(mesh.position)
@@ -83,11 +83,14 @@ function Transform() {
         document.body.appendChild(stats.dom)
 
         const clock = new THREE.Clock()
+        mesh.rotation.reorder('YXZ');
+        mesh.rotation.y = THREE.MathUtils.degToRad(45)
+        mesh.rotation.x = THREE.MathUtils.degToRad(20)
 
         function draw() {
             const time = clock.getElapsedTime();
 
-            mesh.rotation.y = time;
+            // mesh.rotation.y = time;
 
             stats.update()
             camera.lookAt(mesh.position)
@@ -110,8 +113,38 @@ function Transform() {
 
         window.addEventListener('resize', resizeHandler)
 
+        function keyboardDownHandler(event: KeyboardEvent) {
+            console.log(event.key)
+            if(event.key === 'w') {
+                mesh.position.z -= 0.1
+            }
+            if(event.key === 's') {
+                mesh.position.z += 0.1
+            }
+            if(event.key === 'a') {
+                mesh.position.x -= 0.1
+            }
+            if(event.key === 'd') {
+                mesh.position.x += 0.1
+            }
+            if(event.key === ' ') {
+                mesh.position.y += 2
+            }
+        }
+
+        window.addEventListener('keydown', keyboardDownHandler)
+
         return () => {
             window.removeEventListener('resize', resizeHandler)
+            window.removeEventListener('keydown', keyboardDownHandler)
+
+            if(axesHelper) {
+                axesHelper.dispose()
+            }
+
+            if(gridHelper) {
+                gridHelper.dispose()
+            }
 
             if(stats) {
                 stats.dom.remove()
