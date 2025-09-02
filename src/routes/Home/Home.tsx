@@ -13,6 +13,7 @@ function Home() {
                 <button onClick={() => navigate('/utility')}>Go to Utility</button>
                 <button onClick={() => navigate('/transform')}>Go to Transform</button>
                 <button onClick={() => navigate('/group')}>Go to Group</button>
+                <button onClick={() => navigate('/geometry')}>Go to Geometry</button>
             </div>
         </main>
     )
