@@ -108,6 +108,10 @@ function SphereGeometry() {
                 positionArray[i + 2] += Math.sin(time + randomArray[i + 2] * 100) * 0.002
             }
 
+            mesh.position.x += Math.sin(time) * 0.04
+            mesh.position.y += Math.cos(time) * 0.02
+            mesh.position.z += Math.sin(time) * 0.03
+
             geometry.attributes.position.needsUpdate = true // position 속성 값을 업데이트
 
             rendererRef.current?.render(scene, camera)
