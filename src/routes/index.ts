@@ -6,6 +6,7 @@ import Transform from './Transform/Transform'
 import Group from './Group/Group'
 import Geometry from './Geometry/Geometry'
 import SphereGeometry from './SphereGeometry/SphereGeometry'
+import LoadGltf from './LoadGltf/LoadGltf'
 export {
     Home,
     Camera,
@@ -14,5 +15,6 @@ export {
     Transform,
     Group,
     Geometry,
-    SphereGeometry
+    SphereGeometry,
+    LoadGltf
 }
