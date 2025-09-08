@@ -2,6 +2,10 @@
 
 React + TypeScript + Three.js를 활용한 인터랙티브 3D 웹 학습 프로젝트입니다.
 
+![01](https://github.com/user-attachments/assets/cf3c48b8-9e8b-44eb-a278-6ef8b5c08047)
+
+![02](https://github.com/user-attachments/assets/2f90a2eb-3d83-4e16-9005-18b3534d826c)
+
 
 ## 🚀 프로젝트 개요
 
